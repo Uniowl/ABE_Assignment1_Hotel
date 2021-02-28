@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
 
 
-router.get('/AllHotelsWithRooms/:id')
+router.route('/AllHotelsWithRooms')
   .get(hotelController.getHotelsWithRooms);
 
 module.exports = router;
