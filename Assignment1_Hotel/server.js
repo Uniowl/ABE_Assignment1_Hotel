@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'production') {
 async function main() {
     try {
         await mongoose.connect(dbUrl, {
-            useNewIrlParser: true,
+            useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true
         });
@@ -17,3 +17,5 @@ async function main() {
         console.log(error)
     }
 }
+
+main()
