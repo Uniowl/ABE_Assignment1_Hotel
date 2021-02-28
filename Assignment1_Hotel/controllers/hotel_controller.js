@@ -2,6 +2,26 @@ const hotelCollection = require('../models/hotel');
 
 //
 //POST to create Hotel --Mads
+module.exports.addHotel = async function (req, res) {
+    let hotel = await hotelCollection.create({
+        id: req.body.id,
+        name: req.body.name,
+    }).catch(reason =>
+        res.status(400).json({
+            "title": "Unable to create hotel record",
+            "detail": reason
+        })
+    );
+    if (hotel) // The hotel was succesfully added to the collection
+        res.status(201).json({
+            hotel
+        })
+    else {
+        res.status(500).json({
+            "title": "Unknown server error"
+        })
+    };
+};
 
 //POST to create rooms for Hotel-id -- Alex
 
