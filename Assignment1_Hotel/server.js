@@ -18,4 +18,14 @@ async function main() {
     }
 }
 
+mongoose.connection.on('connected', () => {
+    console.log(`Mongoose connected to ${dbUrl}`);
+});
+mongoose.connection.on('error', err => {
+    console.log('Mongoose connection error:', err);
+});
+mongoose.connection.on('disconnected', () => {
+    console.log('Mongoose disconnected');
+});
+
 main()
