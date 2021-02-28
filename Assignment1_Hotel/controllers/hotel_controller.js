@@ -25,6 +25,7 @@ module.exports.addHotel = async function (req, res) {
 
 //POST to create rooms for Hotel-id -- Alex
 
+
 // GET List of rooms from Hotel-id --Trang
 // -- list of available rooms from hotel-id - role = User
 // -- GET all Rooms for Hotel-id which belong to manager - role = hotelManager
