@@ -1,14 +1,15 @@
 const mongoose = require('mongoose'); 
 
 const hotelSchema = new mongoose.Schema({
-    id: Guid,
+    id: String,
     name: String,
+    managerId: String,
     rooms: [{
-        id: Guid,
-        roomNo: int,
-        reservations?: [
+        id: String,
+        roomNo: Number,
+        reservations: [
             {
-                id: Guid,
+                id: String,
                 dateStart: Date,
                 dateEnd: Date
             }
