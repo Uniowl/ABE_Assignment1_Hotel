@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const hotelSchema = new mongoose.Schema({
     id: String,
     name: String,
-    manager: String,
+    managerId: String,
     rooms: [{
         id: String,
         roomNo: Number,
