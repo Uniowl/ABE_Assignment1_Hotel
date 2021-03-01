@@ -32,17 +32,6 @@ module.exports.addHotel = async function (req, res) {
 //GET all rooms for All Hotels - role-type -- Randi
 // -- list of all my resevations -Role = guest
 //
-module.exports.getHotelsWithRooms = async function (req, res){
-    const hotels = await hotelsCollection.find({})
-        .catch(reason => res.status(400).json({
-            "title": "Error",
-            "detail": reason
-        }))
-    res.status(200).json({
-        hotels
-    })
-}
-
 
 //UPDATE list of resevations for Hotel-id -- role = HotelMangaer 
 
