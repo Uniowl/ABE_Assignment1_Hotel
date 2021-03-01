@@ -1,14 +1,17 @@
 const mongoose = require('mongoose'); 
+//const { User } = require('../helpers/role');
+//const User = require('./user');
 
 const hotelSchema = new mongoose.Schema({
-    id: Guid,
+    id: String,
     name: String,
+    manager: String,
     rooms: [{
-        id: Guid,
-        roomNo: int,
-        reservations?: [
+        id: String,
+        roomNo: Number,
+        reservations: [
             {
-                id: Guid,
+                id: String,
                 dateStart: Date,
                 dateEnd: Date
             }
@@ -17,4 +20,4 @@ const hotelSchema = new mongoose.Schema({
 })
 
 const Hotel = mongoose.model('Hotel',hotelSchema); 
-module.exports = Hotel;
+module.exports = Hotel; 
