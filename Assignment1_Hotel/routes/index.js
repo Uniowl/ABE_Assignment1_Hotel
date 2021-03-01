@@ -11,7 +11,7 @@ module.exports = router;
 
 /* Post Add hotel */
 router.route('/addHotel')
-  .post(hotelController.addHotel)
+  .post(hotelController.addHotel); 
 
 /* POST add hotel room */
 // router.route('/:hotelid')
