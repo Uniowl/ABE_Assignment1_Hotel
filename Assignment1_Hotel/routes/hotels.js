@@ -1,4 +1,6 @@
-var hotelController = require('../controllers/hotel_controller'); 
+var express = require('express');
+var router = express.Router();
+const hotelController = require('../controllers/hotel_controller'); 
 
 /**
  * @swagger
@@ -28,16 +30,10 @@ var hotelController = require('../controllers/hotel_controller');
  *                         description: The name of the manager who runs the hotel.
  *                         example: Alexander
  */
-router.route('')
+
+ router.route('')
   .get(hotelController.index)
-  .post(hotelController.addHotel)
-
-
-
-
-/* Post Add hotel */
-// router.route('/addHotel')
-//   .post(hotelController.addHotel); 
+  //.post(hotelController.addHotel)
 
 /* POST add hotel room */
 router.route('/:hotelid')
@@ -46,3 +42,5 @@ router.route('/:hotelid')
 
 router.route('/AllHotelsWithRooms/:userId')
 .get(hotelController.getHotelsWithRooms);
+
+module.exports = router;
