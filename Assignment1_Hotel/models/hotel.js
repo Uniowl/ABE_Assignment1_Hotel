@@ -11,7 +11,8 @@ const hotelSchema = new mongoose.Schema({
             {
                 id: String,
                 dateStart: Date,
-                dateEnd: Date
+                dateEnd: Date,
+                guestId: String
             }
         ],
     }]

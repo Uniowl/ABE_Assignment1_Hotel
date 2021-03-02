@@ -1,4 +1,5 @@
 const hotelCollection = require('../models/hotel');
+const role = require('../helpers/role');
 
 //
 //POST to create Hotel --Mads
@@ -32,6 +33,26 @@ module.exports.addHotel = async function (req, res) {
 //GET all rooms for All Hotels - role-type -- Randi
 // -- list of all my resevations -Role = guest
 //
+module.exports.getHotelsWithRooms = async function (req, res){
+const userId = req.params.userId;
+const user = await userCollection.findbyId(userId);
+if(user.role == role.HotelManager){
+    //map igennem hotels for at sikre person har adgang
+}
+if(user.role = role.User){
+    //map igennem hotels for at finde reservationer guestens id er på
+}
+
+    debugger;
+    const hotels = await hotelsCollection.find({})
+        .catch(reason => res.status(400).json({
+            "title": "Error",
+            "detail": reason
+        }))
+    res.sendStatus(200).json({
+        hotels
+    })
+}
 
 //UPDATE list of resevations for Hotel-id -- role = HotelMangaer 
 
