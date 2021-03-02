@@ -35,8 +35,8 @@ module.exports.addHotel = async function (req, res) {
 //PUT to create rooms for Hotel-id -- Alex
 module.exports.addRoomToHotel = async function (req, res) {
     try {
-        let hotel = await hotelCollection.findByIdAndUpdate(req.params.hotelid, {
-
+        let hotel = await hotelCollection.findByIdAndUpdate(req.params.hotelId, {
+        rooms: hotel.rooms.push(req.body)
         }, {
             new: true
         })
@@ -129,7 +129,7 @@ module.exports.getHotelsWithRooms = async function (req, res){
         }
     } else if(user.role === role.User){
         res.status(401).json({
-            "title": "Not authorized"
+            message: "Unauthorized"
         })
     }
 }
