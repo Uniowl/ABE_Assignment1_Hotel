@@ -46,3 +46,11 @@ router.route('/:hotelid')
 
 router.route('/AllHotelsWithRooms/:userId')
 .get(hotelController.getHotelsWithRooms);
+
+/*GET rooms from hotelid owned by manager*/
+router.route('/:userid/:hotelid')
+.get(hotelController.getRoomsFromHotelID)
+
+/*GET available rooms*/
+router.route('/available/:userid/:hotelid')
+.get(hotelController.getAvailableRoomsFromHotelid)
