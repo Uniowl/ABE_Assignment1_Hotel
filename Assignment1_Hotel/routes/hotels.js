@@ -43,3 +43,6 @@ router.route('')
 router.route('/:hotelid')
 //.get(hotelController.getHotel)
 .put(hotelController.addRoomToHotel)
+
+router.route('/AllHotelsWithRooms/:userId')
+.get(hotelController.getHotelsWithRooms);
