@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var hotelController = require('../controllers/hotel_controller'); 
+
 const userCotroller = require('../controllers/user_controller'); 
 
+<<<<<<< HEAD
 /* GET home page. */
 // router.get('/', function(req, res, next) {
 //   return res.render('index', { title: 'Express' });
@@ -10,6 +11,9 @@ const userCotroller = require('../controllers/user_controller');
 router.route('')
   .get(hotelController.index);
   // .post(hotelController.addHotel)
+=======
+
+>>>>>>> master
 
 //router.get('/', hotelController.index); 
 
@@ -23,14 +27,5 @@ router.route('user/:userId')
 router.route('user/:userId/userToChange/:userToChangeId')
   .put(userCotroller.upgradeUser); 
 
+
 module.exports = router;
-
-
-/* Post Add hotel */
-// router.route('/addHotel')
-//   .post(hotelController.addHotel); 
-
-/* POST add hotel room */
-// router.route('/:hotelid')
-//   //.get(hotelController.getHotel)
-//   .post(hotelController.addRoomToHotel)

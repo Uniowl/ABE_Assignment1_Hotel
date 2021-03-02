@@ -1,6 +1,4 @@
-const mongoose = require('mongoose'); 
-//const { User } = require('../helpers/role');
-//const User = require('./user');
+var hotelController = require('../controllers/hotel_controller'); 
 
 /**
  * @swagger
@@ -30,21 +28,21 @@ const mongoose = require('mongoose');
  *                         description: The name of the manager who runs the hotel.
  *                         example: Alexander
  */
+router.route('')
+  .get(hotelController.index)
+  .post(hotelController.addHotel)
 
-const hotelSchema = new mongoose.Schema({
-    name: String,
-    managerName: String,
-    rooms: [{
-        roomNo: Number,
-        reservations: [
-            {
-                guestId: String,
-                dateStart: Date,
-                dateEnd: Date
-            }
-        ],
-    }]
-})
 
-const Hotel = mongoose.model('Hotel',hotelSchema); 
-module.exports = Hotel; 
+
+
+/* Post Add hotel */
+// router.route('/addHotel')
+//   .post(hotelController.addHotel); 
+
+/* POST add hotel room */
+router.route('/:hotelid')
+//.get(hotelController.getHotel)
+.put(hotelController.addRoomToHotel)
+
+router.route('/AllHotelsWithRooms/:userId')
+.get(hotelController.getHotelsWithRooms);
