@@ -9,11 +9,15 @@ const userCotroller = require('../controllers/user_controller');
 // });
 router.route('')
   .get(hotelController.index)
-  .post(hotelController.addHotel);
+  .post(hotelController.addHotel)
 
+//router.get('/', hotelController.index); 
 
-router.get('/', hotelController.index); 
+router.route('/users')
+  .get(userCotroller.getAllUsers);
 
+router.route('/:userId')
+  .get(userCotroller.getUser); 
 
 module.exports = router;
 
