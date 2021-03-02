@@ -34,33 +34,47 @@ module.exports.addHotel = async function (req, res) {
 
 //PUT to create rooms for Hotel-id
 module.exports.addRoomToHotel = async function (req, res) {
-    console.log('hej');
-    try {
-        let hotelOld = await hotelCollection.findById(req.params.hotelId);
-        let roomsToAdd = req.body;
-        let newWithOldRooms = hotelOld.rooms;
-        newWithOldRooms.push(roomsToAdd);
-        console.log(newWithOldRooms);
-        let hotel = await hotelCollection.findByIdAndUpdate(req.params.hotelId, {
-            rooms: newWithOldRooms
-        }, {
-            new: true
-        })
-        if (hotel) // The student was succesfully added to the collection
-            res.status(200).json({
-                hotel
+    const userId = req.params.userId;
+    const user = await userCollection.findById(userId);
+
+    if (user.role === role.HotelManager) {
+        try {
+            let hotelOld = await hotelCollection.findById(req.params.hotelId);
+            if (hotelOld.managerId === user.name) {         
+                let roomToAdd = req.body;
+                let hotelRooms = hotelOld.rooms;
+                hotelRooms.push(roomToAdd);
+                let hotel = await hotelCollection.findByIdAndUpdate(req.params.hotelId, {
+                    rooms: hotelRooms
+                }, {
+                    new: true
+                })
+                if (hotel) // The student was succesfully added to the collection
+                    res.status(200).json({
+                        hotel
+                    })
+                else {
+                    res.status(500).json({
+                        "title": "Unknown server error"
+                    })
+                };
+            } else {
+                res.status(401).json({
+                    message: "Unauthorized"
+                })
+            }
+
+        } catch (error) {
+            res.status(400).json({
+                "title": "Unable to add room to hotel",
+                "detail": error
             })
-        else {
-            res.status(500).json({
-                "title": "Unknown server error"
-            })
-        };
-    } catch (hotel) {
-        res.status(400).json({
-            "title": "Unable to add room to hotel",
-            "detail": hotel
+        }
+    } else {
+        res.status(401).json({
+            message: "Unauthorized"
         })
-    }
+    }   
 }
 // GET List of rooms from Hotel-id --Trang
 // -- list of available rooms from hotel-id - role = User

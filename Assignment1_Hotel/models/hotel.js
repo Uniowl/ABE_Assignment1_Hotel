@@ -33,7 +33,7 @@ const mongoose = require('mongoose');
 
 const hotelSchema = new mongoose.Schema({
     name: String,
-    managerName: String,
+    managerId: String,
     rooms: [{
         roomNo: Number,
         reservations: [
