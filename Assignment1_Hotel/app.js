@@ -4,6 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('./models/db');
+var swaggerJSDoc = require('swagger-jsdoc');
+
+const app = express();
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
 
 //var indexRouter = require('./routes/index');
@@ -37,12 +42,13 @@ const options = {
   //Paths to files containing OpenAPI definitions
   apis: ['./routes/*.js'],
 };
-
-var swaggerJSDoc = require('swagger-jsdoc');
 const swaggerSpec = swaggerJSDoc(options);
 const swaggerUi = require('swagger-ui-express');
 
-var app = express();
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+app.use(cors());
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
