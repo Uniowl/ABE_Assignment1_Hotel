@@ -1,3 +1,7 @@
+// const jwt = require('express-jwt');
+// const auth = jwt({
+//   secret: process.env.JWT_SECRET,
+// });
 var express = require('express');
 var router = express.Router();
 const hotelController = require('../controllers/hotel_controller');
