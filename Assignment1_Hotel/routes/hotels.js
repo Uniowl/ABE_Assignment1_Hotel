@@ -54,5 +54,7 @@ router.route('/available/:userid/:hotelid')
 .get(hotelController.getAvailableRoomsFromHotelid)
 
 
-router.route('/available/:hotelid')
-.get(hotelController.getAvailableRoomsFromHotelid)
+//router.route('/available')
+//.get(hotelController.getAvailableRoomsFromHotelid)
+
+module.exports = router;

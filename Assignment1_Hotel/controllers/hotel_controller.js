@@ -99,23 +99,25 @@ module.exports.getRoomsFromHotelID = async function (req, res) {
 module.exports.getAvailableRoomsFromHotelid = async function (req, res) {
     const user = await userCollection.findById(req.params.userid)
     if(user.role === role.User) {
-        try{
-            const hotel = await hotelCollection.findById(req.params.hotelid)
-            if (hotel.rooms.reservations) {
-                console.log('Hotel', hotel.rooms)
+        try {          
+            const hotels = await hotelCollection.find({});
+            if(hotels){
                 let reservationsAvailable = [];
-                hotel.rooms.map(function(room){
-                    room.reservations.map(function(reservation){
-                        if(!reservation.guestId){
-                            
-                            reservationsAvailable.push(reservation)
-                        }
+                hotels.map((hotel) => {
+                    hotel.rooms.map(room => {
+                        room.reservations.map(reservation => {
+                            if (!reservation.guestId) {
+                                reservationsAvailable.push({"_id": hotel._id, "name": hotel.name, room});
+                            }
+                        })
                     })
                 })
-            }
-            res.status(200).json({
-                reservationsAvailable
-            })
+                res.status(200).json({
+                    reservationsAvailable 
+                }) 
+            } else {
+                throw ("Hotels not found");
+            }               
         }
         catch (err) {
             res.status(400).json({
