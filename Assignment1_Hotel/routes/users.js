@@ -17,7 +17,7 @@ router.route('/:userId')
   .get(userController.getUser);
 
 //Upgrade user
-router.route('user/:userId/userToChange/:userToChangeId')
+router.route('/user/:userId/userToChange/:userToChangeId')
   .put(userController.upgradeUser); 
 
 module.exports = router;
