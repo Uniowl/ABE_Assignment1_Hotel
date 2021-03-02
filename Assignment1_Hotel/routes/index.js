@@ -8,16 +8,20 @@ const userCotroller = require('../controllers/user_controller');
 //   return res.render('index', { title: 'Express' });
 // });
 router.route('')
-  .get(hotelController.index)
-  .post(hotelController.addHotel)
+  .get(hotelController.index);
+  // .post(hotelController.addHotel)
 
 //router.get('/', hotelController.index); 
 
 router.route('/users')
   .get(userCotroller.getAllUsers);
 
-router.route('/:userId')
-  .get(userCotroller.getUser); 
+router.route('user/:userId')
+  .get(userCotroller.getUser)
+  .post(hotelController.addHotel); 
+
+router.route('user/:userId/userToChange/:userToChangeId')
+  .put(userCotroller.upgradeUser); 
 
 module.exports = router;
 
