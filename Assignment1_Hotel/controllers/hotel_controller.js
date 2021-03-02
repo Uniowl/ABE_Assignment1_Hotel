@@ -1,6 +1,12 @@
 const hotelCollection = require('../models/hotel');
 
 //
+// GET home page 
+module.exports.index = function (req, res) {
+    res.render('index', {title: 'Express'}); 
+}; 
+
+
 //POST to create Hotel --Mads
 module.exports.addHotel = async function (req, res) {
     let hotel = await hotelCollection.create({
