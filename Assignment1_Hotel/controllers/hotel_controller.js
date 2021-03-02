@@ -2,6 +2,12 @@ const hotelCollection = require('../models/hotel');
 const role = require('../helpers/role');
 
 //
+// GET home page 
+module.exports.index = function (req, res) {
+    res.render('index', {title: 'Express'}); 
+}; 
+
+
 //POST to create Hotel --Mads
 module.exports.addHotel = async function (req, res) {
     let hotel = await hotelCollection.create({
@@ -25,6 +31,7 @@ module.exports.addHotel = async function (req, res) {
 };
 
 //POST to create rooms for Hotel-id -- Alex
+
 
 // GET List of rooms from Hotel-id --Trang
 // -- list of available rooms from hotel-id - role = User
