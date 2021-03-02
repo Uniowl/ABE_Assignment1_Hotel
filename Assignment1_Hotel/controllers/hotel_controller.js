@@ -58,24 +58,30 @@ module.exports.addRoomToHotel = async function (req, res) {
 }
 // GET List of rooms from Hotel-id --Trang
 module.exports.getRoomsFromHotelID = async function (req, res) {
-    
-    try {
-        console.log(req.params.hotelid)
-        const manager = manager.findById()
-        const hotel = await hotelCollection.findById(req.params.hotelid);
-        if(hotel) {
-            res.status(200).json({
-                rooms: hotel.rooms
+    const user = await userCollection.findById(req.params.userid)
+    if (user.role === role.HotelManager) {
+        try {
+            const hotel = await hotelCollection.findById(req.params.hotelid)
+            if(hotel.managerId === user.name) {
+                res.status(200).json({
+                    hotel
+                })
+            } else {
+               res.status(401).json({
+                   "title": "Not authorized"
+               })
+            }
+        } catch (err) {
+            res.status(400).json({
+                "title": "Unable to read rooms from DB",
+                "detail": err
             })
-        } else {
-            throw ("Rooms not found from Hotel-id");
-        }
-    } catch (err) {
-        res.status(400).json({
-            "title": "Unable to read rooms from DB",
-            "detail": err
+        }   
+    } else {
+        res.status(401).json({
+            "title" : "Not authorized"
         })
-    }   
+    }
 }
 // -- list of available rooms from hotel-id - role = User
 module.exports.getAvailableRoomsFromHotelid = async function (req, res) {

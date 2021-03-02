@@ -54,3 +54,7 @@ router.route('/:userid/:hotelid')
 /*GET available rooms*/
 router.route('/available/:userid/:hotelid')
 .get(hotelController.getAvailableRoomsFromHotelid)
+
+
+router.route('/available/:hotelid')
+.get(hotelController.getAvailableRoomsFromHotelid)
