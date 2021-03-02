@@ -7,8 +7,18 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-module.exports = router;
+
 
 // get all users 
-router.route('/addAllUsers')
-  .get(userController.getAllUsers); 
+router.route('/users')
+  .get(userController.getAllUsers);
+
+// get specific user from userId
+router.route('users/getUser/:userId')
+  .get(userController.getUser);
+
+//Upgrade user
+router.route('user/:userId/userToChange/:userToChangeId')
+  .put(userController.upgradeUser); 
+
+module.exports = router;

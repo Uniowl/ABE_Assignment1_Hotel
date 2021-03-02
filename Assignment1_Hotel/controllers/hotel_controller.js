@@ -1,10 +1,6 @@
 const hotelCollection = require('../models/hotel');
-<<<<<<< HEAD
-const userCollection = require('../models/user'); 
-=======
 const userCollection = require('../models/user');
 const role = require('../helpers/role');
->>>>>>> master
 const hotels = require('../hotels'); 
 const { User } = require('../helpers/role');
 const usersList = require('../usersList');
