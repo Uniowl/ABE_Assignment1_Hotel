@@ -3,14 +3,47 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-require('./models/db'); 
+require('./models/db');
 
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 
+const swaggerDefinition = {
+  openapi:'3.0.0',
+  info: {
+    title: 'Express API to manage Hotels',
+    version: '1.0.0', 
+    description: 'This is a REST API application made with Express',
+    license: {
+      name: 'Licensed Under MIT',
+      url: 'https://spdx.org/licenses/MIT.html',
+    },
+    contact: {
+      name: 'Gruppe 4',
+      url:'https://github.com/Uniowl/ABE_Assignment1_Hotel',
+    },
+    servers: [{
+      url: 'http://localhost:3000',
+      description: 'Developmentserver',
+    }]
+  }
+};
+
+const options = {
+  swaggerDefinition,
+  //Paths to files containing OpenAPI definitions
+  apis: ['./routes/*.js'],
+};
+
+var swaggerJSDoc = require('swagger-jsdoc');
+const swaggerSpec = swaggerJSDoc(options);
+const swaggerUi = require('swagger-ui-express');
+
 var app = express();
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,21 +76,4 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-//Swagger
-const swaggerJSDoc = require('swagger-jsdoc');
-import swaggerJSDoc from'swagger-jsdoc';
-const swaggerDefinition = {
-  openapi:'3.0.0',
-  info:{
-    title: 'ExpressAPItomanagestudents',
-    version: '1.0.0',
-  },
-};
-const options = {
-  swaggerDefinition,
-  PathstofilescontainingOpenAPIdefinitionsapis: ['./routes/*.js'],
-};
-const swaggerSpec = swaggerJSDoc(options);
 
-const swaggerUi = require('swagger-ui-express');
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
