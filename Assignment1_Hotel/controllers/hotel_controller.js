@@ -1,5 +1,5 @@
 const hotelCollection = require('../models/hotel');
-const hotels = require('../hotels'); 
+//const hotels = require('../hotels'); 
 
 //
 // GET home page 

@@ -1,19 +1,15 @@
-var express = require('express');
-var router = express.Router();
+// var express = require('express');
+// var router = express.Router();
 
-const userCotroller = require('../controllers/user_controller'); 
+// const userCotroller = require('../controllers/user_controller'); 
 
 
 
-//router.get('/', hotelController.index); 
+// //router.get('/', hotelController.index); 
 
-router.route('/users')
-  .get(userCotroller.getAllUsers);
 
-router.route('/:userId')
-  .get(userCotroller.getUser); 
 
-module.exports = router;
+// module.exports = router;
 
 
 
