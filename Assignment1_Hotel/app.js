@@ -42,3 +42,19 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+//Swagger
+const swaggerJSDoc = require('swagger-jsdoc');
+import swaggerJSDoc from'swagger-jsdoc';
+const swaggerDefinition = {
+  openapi:'3.0.0',
+  info:{
+    title: 'ExpressAPItomanagestudents',
+    version: '1.0.0',
+  },
+};
+const options = {
+  swaggerDefinition,
+  PathstofilescontainingOpenAPIdefinitionsapis: ['./routes/*.js'],
+};
+const swaggerSpec = swaggerJSDoc(options);
