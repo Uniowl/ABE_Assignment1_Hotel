@@ -6,8 +6,8 @@ var logger = require('morgan');
 require('./models/db');
 
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+//var indexRouter = require('./routes/index');
+
 
 
 const swaggerDefinition = {
@@ -55,8 +55,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-//app.use('/users', usersRouter);
+
+//Routes
+app.use('/', require('./routes/index'));
+
+app.use('/hotels', require('./routes/hotels'));
+
+app.use('/users', require('./routes/users'));
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
