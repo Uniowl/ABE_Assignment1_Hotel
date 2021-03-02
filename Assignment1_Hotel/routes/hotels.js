@@ -39,6 +39,11 @@ router.route('')
  *   post:
  *     summary: Add new hotel to collection and assign user as manager
  *     description: Creates a new hotel and adds the given userId as a manager
+ *     parameters: 
+ *     - in: path
+ *       name: userId
+ *       required: true
+ *       description: The unique ID of the user who will be assigned manager
  *     responses:
  *       200:
  *         description: The hotel was created and manager was added
@@ -67,6 +72,11 @@ router.route('/addHotel/:userId')
 *   post:
 *     summary: Add a room to a hotel
 *     description: Through a hotel id add a room to the hotel
+*     parameters: 
+*     - in: path
+*       name: hotelId
+*       required: true
+*       description: The unique ID of the hotel that the room will be added to
 *     responses:
 *       201:
 *         description: Hotel room was created succesfully.
@@ -94,10 +104,15 @@ router.route('/:hotelid')
 
 /**
 * @swagger
-* /AllHotelsWithRooms/:userId:
+* /hotels/AllHotelsWithRooms/:userId:
 *   get:
 *     summary: Returns hotelrooms for user
 *     description: Shows all hotelrooms where the given userID is found in the reservationlist
+*     parameters: 
+*     - in: path
+*       name: userId
+*       required: true
+*       description: The rooms that have this user ID in its reservationlist will be shown
 *     responses:
 *       200:
 *         description: Found hotelrooms
