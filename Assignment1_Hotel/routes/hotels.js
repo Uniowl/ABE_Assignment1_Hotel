@@ -30,15 +30,17 @@ const hotelController = require('../controllers/hotel_controller');
  *                         description: The name of the manager who runs the hotel.
  *                         example: Alexander
  */
+router.route('')
+  .get(hotelController.index);
 
- router.route('')
-  .get(hotelController.index)
-  //.post(hotelController.addHotel)
+/* Post Add hotel */
+router.route('addHotel/:userId')
+  .post(hotelController.addHotel); 
 
 /* POST add hotel room */
 router.route('/:hotelid')
-//.get(hotelController.getHotel)
-.put(hotelController.addRoomToHotel)
+  //.get(hotelController.getHotel)
+  .put(hotelController.addRoomToHotel);
 
 router.route('/AllHotelsWithRooms/:userId')
 .get(hotelController.getHotelsWithRooms);
