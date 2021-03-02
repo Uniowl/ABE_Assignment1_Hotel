@@ -25,4 +25,4 @@ module.exports = router;
 /* POST add hotel room */
 router.route('/:hotelid')
   //.get(hotelController.getHotel)
-  .post(hotelController.addRoomToHotel)
+  .put(hotelController.addRoomToHotel)
