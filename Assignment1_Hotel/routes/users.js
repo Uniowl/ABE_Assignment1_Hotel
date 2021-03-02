@@ -7,11 +7,17 @@ const userController = require('../controllers/user_controller');
 //   res.send('respond with a resource');
 // });
 
+
 // get all users 
 router.route('')
   .get(userController.getAllUsers);
 
+// get specific user from userId
 router.route('/:userId')
   .get(userController.getUser);
+
+//Upgrade user
+router.route('user/:userId/userToChange/:userToChangeId')
+  .put(userController.upgradeUser); 
 
 module.exports = router;

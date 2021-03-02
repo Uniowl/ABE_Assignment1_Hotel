@@ -1,4 +1,6 @@
+const role = require('../helpers/role');
 const userCollection = require('../models/user'); 
+
 
 
 // GET all users 
@@ -39,8 +41,34 @@ module.exports.getUser = async function (req, res){
 
 
 //UPDATE/PUT upgrade User to hotelMangaer by user-id
+module.exports.upgradeUser = async function (req, res){
+    const userId = req.params.userId; 
+    const currentUser = await userCollection.findById(userId); 
+    if(currentUser.role === role.Admin){
+        let userToChange = await userCollection.findByIdAndUpdate(req.params.userToChangeId,{
+            role: req.body.role
+        },{
+            new: true
+        })
+        if(userToChange){
+            res.status(200).json({
+                userToChange
+            })
+        }else {
+            res.status(500).json({
+                "title":"Unknown server error"
+            })
+        };
+    } else {
+        res.status(401).json({
+            "title": "User not authorized - no admin rights"
+        })
+    }
+}
 
-// 
+
+
+
 
 //- Create user
 //Delete User 
