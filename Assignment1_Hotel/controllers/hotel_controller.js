@@ -32,11 +32,17 @@ module.exports.addHotel = async function (req, res) {
     };
 };
 
-//PUT to create rooms for Hotel-id -- Alex
+//PUT to create rooms for Hotel-id
 module.exports.addRoomToHotel = async function (req, res) {
+    console.log('hej');
     try {
+        let hotelOld = await hotelCollection.findById(req.params.hotelId);
+        let roomsToAdd = req.body;
+        let newWithOldRooms = hotelOld.rooms;
+        newWithOldRooms.push(roomsToAdd);
+        console.log(newWithOldRooms);
         let hotel = await hotelCollection.findByIdAndUpdate(req.params.hotelId, {
-        rooms: hotel.rooms.push(req.body)
+            rooms: newWithOldRooms
         }, {
             new: true
         })
