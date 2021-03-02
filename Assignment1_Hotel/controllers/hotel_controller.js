@@ -1,11 +1,7 @@
 const hotelCollection = require('../models/hotel');
-<<<<<<< HEAD
-//const hotels = require('../hotels'); 
-=======
 const userCollection = require('../models/user');
 const role = require('../helpers/role');
 const hotels = require('../hotels'); 
->>>>>>> 3315a356ab03b3cd79eda6856817a63511c13847
 
 //
 // GET home page 
@@ -140,4 +136,4 @@ module.exports.getHotelsWithRooms = async function (req, res){
 
 //UPDATE list of resevations for Hotel-id -- role = HotelMangaer 
 
-//DELETE reservations for room-id from hotel-id -- role = hotelManager
+//DELETE reservations for room-id from hotel-id -- role = hotelManagermodule.exports = router;
