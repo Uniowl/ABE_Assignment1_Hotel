@@ -27,7 +27,7 @@ router.get('/', hotelController.index);
 //   //.get(hotelController.getHotel)
 //   .post(hotelController.addRoomToHotel)
 
-router.route('/AllHotelsWithRooms')
+router.route('/AllHotelsWithRooms/:userId')
 .get(hotelController.getHotelsWithRooms);
 
 
