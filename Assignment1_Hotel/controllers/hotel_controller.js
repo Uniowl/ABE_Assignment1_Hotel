@@ -34,7 +34,7 @@ module.exports.addHotel = async function (req, res) {
 module.exports.addRoomToHotel = async function (req, res) {
     try {
         let hotel = await hotelCollection.findByIdAndUpdate(req.params.hotelid, {
-            
+
         }, {
             new: true
         })
