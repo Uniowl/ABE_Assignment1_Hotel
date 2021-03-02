@@ -44,29 +44,49 @@ module.exports.addHotel = async function (req, res) {
     }
 };
 
-//PUT to create rooms for Hotel-id -- Alex
+//PUT to create rooms for Hotel-id
 module.exports.addRoomToHotel = async function (req, res) {
-    try {
-        let hotel = await hotelCollection.findByIdAndUpdate(req.params.hotelid, {
+    const userId = req.params.userId;
+    const user = await userCollection.findById(userId);
 
-        }, {
-            new: true
-        })
-        if (hotel) // The student was succesfully added to the collection
-            res.status(200).json({
-                hotel
+    if (user.role === role.HotelManager) {
+        try {
+            let hotelOld = await hotelCollection.findById(req.params.hotelId);
+            if (hotelOld.managerId === user.name) {         
+                let roomToAdd = req.body;
+                let hotelRooms = hotelOld.rooms;
+                hotelRooms.push(roomToAdd);
+                let hotel = await hotelCollection.findByIdAndUpdate(req.params.hotelId, {
+                    rooms: hotelRooms
+                }, {
+                    new: true
+                })
+                if (hotel) // The student was succesfully added to the collection
+                    res.status(200).json({
+                        hotel
+                    })
+                else {
+                    res.status(500).json({
+                        "title": "Unknown server error"
+                    })
+                };
+            } else {
+                res.status(401).json({
+                    message: "Unauthorized"
+                })
+            }
+
+        } catch (error) {
+            res.status(400).json({
+                "title": "Unable to add room to hotel",
+                "detail": error
             })
-        else {
-            res.status(500).json({
-                "title": "Unknown server error"
-            })
-        };
-    } catch (hotel) {
-        res.status(400).json({
-            "title": "Unable to add room to hotel",
-            "detail": hotel
+        }
+    } else {
+        res.status(401).json({
+            message: "Unauthorized"
         })
-    }
+    }   
 }
 // GET List of rooms from Hotel-id --Trang
 module.exports.getRoomsFromHotelID = async function (req, res) {
@@ -195,7 +215,7 @@ module.exports.getHotelsWithRooms = async function (req, res){
         }
     } else if(user.role === role.User){
         res.status(401).json({
-            "title": "Not authorized"
+            message: "Unauthorized"
         })
     }
 }
