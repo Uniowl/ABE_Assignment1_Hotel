@@ -16,3 +16,12 @@ module.exports = hotels = [{
         ],
     }]
 }]
+
+
+
+/* GET list if rooms from hotel id */
+router.route('/:userid/:hotelid')
+.get(hotelController.getRoomsFromHotelID)
+
+router.route('/available/:userid/:hotelid')
+.get(hotelController.getAvailableRoomsFromHotelid)
