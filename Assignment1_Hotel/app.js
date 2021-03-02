@@ -58,3 +58,6 @@ const options = {
   PathstofilescontainingOpenAPIdefinitionsapis: ['./routes/*.js'],
 };
 const swaggerSpec = swaggerJSDoc(options);
+
+const swaggerUi = require('swagger-ui-express');
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
