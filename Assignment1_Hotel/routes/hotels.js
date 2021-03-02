@@ -32,7 +32,7 @@ const hotelController = require('../controllers/hotel_controller');
  */
 
  router.route('')
-  .get(hotelController.getHotelsWithRooms)
+  .get(hotelController.index)
   //.post(hotelController.addHotel)
 
 /* POST add hotel room */

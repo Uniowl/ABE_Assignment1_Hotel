@@ -6,7 +6,7 @@ const hotels = require('../hotels');
 //
 // GET home page 
 module.exports.index = function (req, res) {
-    res.render('index', {title: 'Express'}); 
+    res.render('index', {title: 'Hotels'}); 
 }; 
 
 
@@ -76,7 +76,7 @@ module.exports.getHotelsWithRooms = async function (req, res){
                 res.status(200).json({
                     hotels
                 })
-            } else{
+            } else {
                 throw ("Hotels not found");
             }
         } catch (error) {

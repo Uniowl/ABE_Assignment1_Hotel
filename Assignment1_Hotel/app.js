@@ -57,9 +57,7 @@ app.use(cookieParser());
 
 
 //Routes
-app.use('', function (req, res) {
-  res.render('index', {title: 'Express'});
-});
+app.use('/', require('./routes/index'));
 
 app.use('/hotels', require('./routes/hotels'));
 
