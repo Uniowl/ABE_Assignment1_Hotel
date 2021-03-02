@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var hotelController = require('../controllers/hotel_controller'); 
 const userCotroller = require('../controllers/user_controller'); 
+const Hotel = require('../models/hotel');
 
 /* GET home page. */
 // router.get('/', function(req, res, next) {
@@ -15,8 +16,11 @@ router.route('')
 router.get('/', hotelController.index); 
 
 
-module.exports = router;
+/* GET list if rooms from hotel id */
+router.route('/:hotelid')
+.get(hotelController.getRoomsFromHotelID)
 
+module.exports = router;
 
 /* Post Add hotel */
 // router.route('/addHotel')

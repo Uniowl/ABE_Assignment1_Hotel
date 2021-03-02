@@ -31,14 +31,32 @@ module.exports.addHotel = async function (req, res) {
 
 //POST to create rooms for Hotel-id -- Alex
 
-
 // GET List of rooms from Hotel-id --Trang
+module.exports.getRoomsFromHotelID = async function (req, res) {
+    
+    try {
+        console.log(req.params.hotelid)
+        const manager = manager.findById()
+        const hotel = await hotelCollection.findById(req.params.hotelid);
+        if(hotel) {
+            res.status(200).json({
+                rooms: hotel.rooms
+            })
+        } else {
+            throw ("Rooms not found from Hotel-id");
+        }
+    } catch (err) {
+        res.status(400).json({
+            "title": "Unable to read rooms from DB",
+            "detail": err
+        })
+    }   
+}
 // -- list of available rooms from hotel-id - role = User
 // -- GET all Rooms for Hotel-id which belong to manager - role = hotelManager
 
 //GET all rooms for All Hotels - role-type -- Randi
 // -- list of all my resevations -Role = guest
-//
 
 //UPDATE list of resevations for Hotel-id -- role = HotelMangaer 
 
