@@ -1,21 +1,24 @@
-// const jwt = require('express-jwt');
-// //const { secret } = require('config.json');
+const jwt = require('express-jwt');
+//const { secret } = require('config.json');
 
-// module.exports = authorize; 
+module.exports = authorize; 
 
-// function authorize(role) {
-//     // if(typeof role === 'string'){
-//     //     role = 
-//     // }
+function authorize(roles) {
+    if(typeof roles === 'string'){
+        roles = [roles]; 
+    }
 
-//     return [
-//         jwt({secret, algorithms: ['HS256']}),
+    return [
+        jwt({secret, algorithms: ['HS256']}),
 
-//         //authorize based on user role
-//         (req, res, next) => {
+        //authorize based on user role
+        (req, res, next) => {
+            if(roles.length && !roles.includes(req.user.role)){
+                return res.status(401).json({message: 'Unauthorized'}); 
+            }
+            //authentication and authorization sucessful
+            next(); 
+        }
+    ];
 
-//         }
-//     ]
-
-
-// })
+}
