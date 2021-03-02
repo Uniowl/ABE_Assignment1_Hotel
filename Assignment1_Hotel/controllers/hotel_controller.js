@@ -1,6 +1,5 @@
 const hotelCollection = require('../models/hotel');
 const userCollection = require('../models/user');
-const role = require('../helpers/role');
 const hotels = require('../hotels'); 
 const { User } = require('../helpers/role');
 const usersList = require('../usersList');
