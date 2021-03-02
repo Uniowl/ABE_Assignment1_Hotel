@@ -15,12 +15,15 @@ router.route('')
 
 router.get('/', hotelController.index); 
 
+router.route('/users')
+  .get(userCotroller.getAllUsers);
 
-/* GET list if rooms from hotel id */
-router.route('/:hotelid')
-.get(hotelController.getRoomsFromHotelID)
+router.route('/:userId')
+  .get(userCotroller.getUser); 
+
 
 module.exports = router;
+
 
 /* Post Add hotel */
 // router.route('/addHotel')
