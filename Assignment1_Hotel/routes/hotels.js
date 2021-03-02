@@ -36,8 +36,17 @@ const hotelController = require('../controllers/hotel_controller');
   //.post(hotelController.addHotel)
 
 /* POST add hotel room */
+<<<<<<< HEAD
 // router.route('/:hotelid')
 //     //.get(hotelController.getHotel)
 //     .put(hotelController.addRoomToHotel)
 
 module.exports = router;
+=======
+router.route('/:hotelid')
+//.get(hotelController.getHotel)
+.put(hotelController.addRoomToHotel)
+
+router.route('/AllHotelsWithRooms/:userId')
+.get(hotelController.getHotelsWithRooms);
+>>>>>>> 3315a356ab03b3cd79eda6856817a63511c13847
