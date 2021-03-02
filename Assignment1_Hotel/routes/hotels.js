@@ -34,7 +34,7 @@ router.route('')
   .get(hotelController.index);
 
 /* Post Add hotel */
-router.route('addHotel/:userId')
+router.route('/addHotel/:userId')
   .post(hotelController.addHotel); 
 
 /* POST add hotel room */
