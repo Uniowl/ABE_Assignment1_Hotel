@@ -1,6 +1,7 @@
 const hotelCollection = require('../models/hotel');
 const userCollection = require('../models/user');
 const role = require('../helpers/role');
+const hotels = require('../hotels'); 
 
 //
 // GET home page 
@@ -31,8 +32,30 @@ module.exports.addHotel = async function (req, res) {
     };
 };
 
-//POST to create rooms for Hotel-id -- Alex
+//PUT to create rooms for Hotel-id -- Alex
+module.exports.addRoomToHotel = async function (req, res) {
+    try {
+        let hotel = await hotelCollection.findByIdAndUpdate(req.params.hotelid, {
 
+        }, {
+            new: true
+        })
+        if (hotel) // The student was succesfully added to the collection
+            res.status(200).json({
+                hotel
+            })
+        else {
+            res.status(500).json({
+                "title": "Unknown server error"
+            })
+        };
+    } catch (hotel) {
+        res.status(400).json({
+            "title": "Unable to add room to hotel",
+            "detail": hotel
+        })
+    }
+}
 // GET List of rooms from Hotel-id --Trang
 // -- list of available rooms from hotel-id - role = User
 // -- GET all Rooms for Hotel-id which belong to manager - role = hotelManager
