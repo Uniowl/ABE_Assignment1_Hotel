@@ -6,7 +6,7 @@ const authorize = require('../helpers/authorize');
 
 /**
  * @swagger
- * /hotels:
+ * '':
  *   get:
  *     summary: Retrieve the list of all hotels
  *     description: Retrieve a list of hotels. Including their rooms
@@ -37,7 +37,7 @@ router.route('')
 
 /**
  * @swagger
- * /hotels:
+ * /addHotel/:userId:
  *   post:
  *     summary: Add new hotel to collection and assign user as manager
  *     description: Creates a new hotel and adds the given userId as a manager
