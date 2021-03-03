@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('../controllers/user_controller'); 
+const userController = require('../controllers/user_controller');
+const role = require('../helpers/role')
+const authorize = require('../helpers/authorize');
 
 
 /* GET users listing. */
@@ -44,8 +46,8 @@ router.route('/login')
   .post(userController.login);
 
 // get all users 
-router.route('')
-  .get(userController.getAllUsers);
+router.route('/')
+  .get(userController.getAllUsers, authorize(role.Admin));
 
 
   /**
@@ -135,7 +137,7 @@ router.route('/:userId')
  */
 
 //Upgrade user
-router.route('/user/:userId/userToChange/:userToChangeId')
-  .put(userController.upgradeUser); 
+router.route('/upgradeUser/:id', authorize(role.Admin))
+  .put(userController.upgradeUser);
 
 module.exports = router;

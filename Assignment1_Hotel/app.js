@@ -6,16 +6,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('./models/db');
 var swaggerJSDoc = require('swagger-jsdoc');
-
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-
-//var indexRouter = require('./routes/index');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var hotelsRouter = require('./routes/hotels'); 
 
 const swaggerDefinition = {
   openapi:'3.0.0',
@@ -65,9 +59,9 @@ app.use(cookieParser());
 
 
 //Routes
-app.use('/', indexRouter);
-app.use('/hotels', hotelsRouter);
-app.use('/users', usersRouter);
+app.use('/', require('./routes/index'));
+app.use('/hotels', require('./routes/hotels'));
+app.use('/users', require('./routes/users'));
 
 
 // app.use('/', require('./routes/index'));

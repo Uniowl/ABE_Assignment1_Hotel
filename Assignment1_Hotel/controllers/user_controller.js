@@ -12,6 +12,7 @@ module.exports.register = async function(req, res){
         const user = await userCollection.create({
             name: req.body.name,
             password: hashedPassword,
+            role: role.Admin,
             email: `${req.body.name}@hotelfour.dk`
         });
         res.send(user);
@@ -25,6 +26,7 @@ module.exports.register = async function(req, res){
 
 //login - OBS: Den står og kører evigt efter linje 46: "res.status(200);"
 const jwt = require('jsonwebtoken');
+const { HotelManager } = require('../helpers/role');
 module.exports.login = async function(req, res) {
     try {
         const user = await userCollection.findOne({name: req.body.name});
@@ -39,8 +41,7 @@ module.exports.login = async function(req, res) {
                     role: user.role,
                     exp: parseInt(Date.now() / 1000) //unix time in seconds
                 }, 
-                    "secret"
-                    //process.env.JWT_SECRET
+                    process.env.JWT_SECRET
                 );
                 res.send({token});
             } else {
@@ -61,7 +62,7 @@ module.exports.login = async function(req, res) {
 }
 
 // GET all users 
-module.exports.getAllUsers = async function (req, res ) {
+module.exports.getAllUsers = async function (req, res, next ) {
     try {
         const users = await userCollection.find({}); 
         if(users){
@@ -99,28 +100,20 @@ module.exports.getUser = async function (req, res){
 
 //UPDATE/PUT upgrade User to hotelMangaer by user-id
 module.exports.upgradeUser = async function (req, res){
-    const userId = req.params.userId; 
-    const currentUser = await userCollection.findById(userId); 
-    if(currentUser.role === role.Admin){
-        let userToChange = await userCollection.findByIdAndUpdate(req.params.userToChangeId,{
-            role: req.body.role
-        },{
-            new: true
+    let userToUpgrade = await userCollection.findByIdAndUpdate(req.params.id,{
+        role: HotelManager
+    },{
+        new: true
+    })
+    if(userToUpgrade){
+        res.status(200).json({
+            userToChange: userToUpgrade
         })
-        if(userToChange){
-            res.status(200).json({
-                userToChange
-            })
-        }else {
-            res.status(500).json({
-                "title":"Unknown server error"
-            })
-        };
-    } else {
-        res.status(401).json({
-            "title": "User not authorized - no admin rights"
+    }else {
+        res.status(500).json({
+            "title":"Unknown server error"
         })
-    }
+    };
 }
 
 

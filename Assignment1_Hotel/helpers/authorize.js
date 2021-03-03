@@ -1,5 +1,5 @@
 const jwt = require('express-jwt');
-//const { secret } = require('config.json');
+const { secret } = require('./config.json');
 
 module.exports = authorize; 
 
@@ -16,10 +16,9 @@ function authorize(roles) {
             if(roles.length && !roles.includes(req.user.role)){
                 return res.status(401).json({message: 'Unauthorized'}); 
             }
-            
+
             //authentication and authorization sucessful
-            next(); 
+            next();
         }
     ];
-
 }
