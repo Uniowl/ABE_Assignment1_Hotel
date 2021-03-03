@@ -1,18 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/user_controller');
-const role = require('../helpers/role')
+const role = require('../helpers/role');
 const authorize = require('../helpers/authorize');
-
-
-/* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
 
 /**
  * @swagger
- * /users:
+ * /:
  *   get:
  *     summary: Retrieve the list of all users
  *     description: Retrieve a list of all users, and their roles
@@ -46,13 +40,13 @@ router.route('/login')
   .post(userController.login);
 
 // get all users 
-router.route('/')
-  .get(userController.getAllUsers, authorize(role.Admin));
+router.route('/', authorize(role.Admin))
+  .get(userController.getAllUsers);
 
 
   /**
  * @swagger
- * /users/:userId:
+ * /:userId:
  *   get:
  *     summary: Get a user by userId
  *     description: Retrive a specific user.
@@ -89,24 +83,17 @@ router.route('/')
  */
 
 // get specific user from userId
-router.route('/:userId')
-  .get(userController.getUser);
-
-
+router.get('/:userId', authorize(role.Admin), userController.getUser);
 
    /**
  * @swagger
- * /users/:userId/userToChange/:userToChangeId:
+ * /upgradeUser/:id:
  *   put:
  *     summary: if you as a user have admin rights, change another users role
- *     description: give a userId and a userToChangeId for the user you want to change
+ *     description: give a user ID for the user you want to change
  *     parameters: 
  *       - in: path
- *         name: userId
- *         required: true
- *         description: a unique string ID of the currentUser
- *       - in: path
- *         name: userToChangeId
+ *         name: id
  *         required: true
  *         description: a unique string ID of the user you want to change
  *     responses:
@@ -137,7 +124,7 @@ router.route('/:userId')
  */
 
 //Upgrade user
-router.route('/upgradeUser/:id', authorize(role.Admin))
-  .put(userController.upgradeUser);
+router.put('/upgradeUser/:id', authorize(role.Admin), userController.upgradeUser);
+
 
 module.exports = router;

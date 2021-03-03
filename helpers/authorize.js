@@ -1,15 +1,16 @@
 const jwt = require('express-jwt');
-const { secret } = require('./config.json');
+//const { secret } = require('./config.json');
+//const secret = "process.env.JWT_SECRET";
 
 module.exports = authorize; 
 
-function authorize(roles) {
+function authorize(roles = []) {
     if(typeof roles === 'string'){
         roles = [roles]; 
     }
 
     return [
-        jwt({secret, algorithms: ['HS256']}),
+        jwt({secret: process.env.JWT_SECRET, algorithms: ['HS256']}),
 
         //authorize based on user role
         (req, res, next) => {
