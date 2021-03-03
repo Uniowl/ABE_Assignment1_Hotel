@@ -1,10 +1,8 @@
-// const jwt = require('express-jwt');
-// const auth = jwt({
-//   secret: process.env.JWT_SECRET,
-// });
 var express = require('express');
 var router = express.Router();
 const hotelController = require('../controllers/hotel_controller');
+const role = require('../helpers/role');
+const authorize = require('../helpers/authorize');
 
 /**
  * @swagger
@@ -66,8 +64,7 @@ router.route('')
  *                         description: Id for the user who will be assigned as manager for the created hotel
  *                         example: 603e02dfcc68d8751453b861
  */
-router.route('/addHotel/:userId')
-.post(hotelController.addHotel);
+router.post('/addHotel/:userId', authorize(role.HotelManager), hotelController.addHotel);
 
 /**
 * @swagger
@@ -101,9 +98,7 @@ router.route('/addHotel/:userId')
 *                        description: A json object describing a room
 *                        example: {"roomNo": 8,"reservations":[{"dateStart": "2021-03-02T09:18:23.807+00:00","guestId": "Randi"}]}
 */
-router.route('/:hotelId/user/:userId')
-  //.get(hotelController.getHotel)
-  .put(hotelController.addRoomToHotel);
+router.put('/:hotelId/user/:userId', authorize(role.HotelManager), hotelController.addRoomToHotel);
 
 /**
 * @swagger
@@ -137,7 +132,6 @@ router.route('/:hotelId/user/:userId')
 *                        description: A json object describing a room
 *                        example: {"roomNo": 8,"reservations":[{"dateStart": "2021-03-02T09:18:23.807+00:00","guestId": "Randi"}]}
 */
-router.route('/AllHotelsWithRooms/:userId')
-  .get(hotelController.getHotelsWithRooms);
+router.get('/AllHotelsWithRooms/:userId', authorize([role.HotelManager, role.Admin, role.Guest]), hotelController.getHotelsWithRooms);
 
 module.exports = router;

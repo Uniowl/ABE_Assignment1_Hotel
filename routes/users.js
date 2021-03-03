@@ -1,14 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/user_controller');
-const role = require('../helpers/role')
+const role = require('../helpers/role');
 const authorize = require('../helpers/authorize');
-
-
-/* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
 
 /**
  * @swagger
@@ -46,8 +40,8 @@ router.route('/login')
   .post(userController.login);
 
 // get all users 
-router.route('/')
-  .get(userController.getAllUsers, authorize(role.Admin));
+router.route('/', authorize(role.Admin))
+  .get(userController.getAllUsers);
 
 
   /**
@@ -89,10 +83,7 @@ router.route('/')
  */
 
 // get specific user from userId
-router.route('/:userId')
-  .get(userController.getUser);
-
-
+router.get('/:userId', authorize(role.Admin), userController.getUser);
 
    /**
  * @swagger
@@ -137,7 +128,7 @@ router.route('/:userId')
  */
 
 //Upgrade user
-router.route('/upgradeUser/:id', authorize(role.Admin))
-  .put(userController.upgradeUser);
+router.put('/upgradeUser/:id', authorize(role.Admin), userController.upgradeUser);
+
 
 module.exports = router;

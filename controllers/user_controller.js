@@ -3,16 +3,14 @@ const userCollection = require('../models/user');
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
-//Randis inspiration udover slides: https://holycoders.com/node-js-bcrypt-authentication/
-
-//register - OBS: mangler at generere jwt 
+//register 
 module.exports.register = async function(req, res){
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
         const user = await userCollection.create({
             name: req.body.name,
             password: hashedPassword,
-            role: role.Admin,
+            role: role.User,
             email: `${req.body.name}@hotelfour.dk`
         });
         res.send(user);
@@ -24,7 +22,7 @@ module.exports.register = async function(req, res){
     }
 }
 
-//login - OBS: Den står og kører evigt efter linje 46: "res.status(200);"
+//login 
 const jwt = require('jsonwebtoken');
 const { HotelManager } = require('../helpers/role');
 module.exports.login = async function(req, res) {
@@ -35,11 +33,10 @@ module.exports.login = async function(req, res) {
             const compareResult = await bcrypt.compare(req.body.password, user.password);
             if(compareResult){
                 const token = jwt.sign({
-                    //sub: user._id,
                     name: user.name,
                     email: user.email,
-                    role: user.role,
-                    exp: parseInt(Date.now() / 1000) //unix time in seconds
+                    role: user.role
+                   // exp: parseInt(Date.now() / 1000 ) +60*60//unix time in seconds
                 }, 
                     process.env.JWT_SECRET
                 );
@@ -115,11 +112,3 @@ module.exports.upgradeUser = async function (req, res){
         })
     };
 }
-
-
-
-
-
-//- Create user
-//Delete User 
-
