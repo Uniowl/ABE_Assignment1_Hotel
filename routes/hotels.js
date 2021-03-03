@@ -135,15 +135,9 @@ router.put('/:hotelId/user/:userId', authorize(role.HotelManager), hotelControll
 router.get('/AllHotelsWithRooms/:userId', authorize([role.HotelManager, role.Admin, role.Guest]), hotelController.getHotelsWithRooms);
 
 /*GET rooms from hotelid owned by manager*/
-router.route('/:userid/:hotelid')
-.get(hotelController.getRoomsFromHotelID)
+router.get('/:userid/:hotelid', authorize(role.HotelManager), hotelController.getRoomsFromHotelID);
 
 /*GET available rooms*/
-router.route('/available/:userid/:hotelid')
-.get(hotelController.getAvailableRoomsFromHotelid)
-
-
-//router.route('/available')
-//.get(hotelController.getAvailableRoomsFromHotelid)
+router.get('/available/:userid/:hotelid', authorize(role.User), hotelController.getAvailableRoomsFromHotelid);
 
 module.exports = router;
