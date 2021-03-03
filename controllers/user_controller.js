@@ -32,7 +32,7 @@ module.exports.login = async function(req, res) {
         const user = await userCollection.findOne({name: req.body.name});
         console.log(user);
         if(user){
-            const compareResult = bcrypt.compare(req.body.password, user.password);
+            const compareResult = await bcrypt.compare(req.body.password, user.password);
             if(compareResult){
                 const token = jwt.sign({
                     //sub: user._id,
