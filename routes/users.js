@@ -6,7 +6,7 @@ const authorize = require('../helpers/authorize');
 
 /**
  * @swagger
- * /:
+ * /users/:
  *   get:
  *     summary: Retrieve the list of all users
  *     description: Retrieve a list of all users, and their roles
@@ -46,8 +46,10 @@ router.route('/', authorize(role.Admin))
 
   /**
  * @swagger
- * /:userId:
+ * /users/:userId:
  *   get:
+ *     security: 
+ *       - bearerAuth: JWT
  *     summary: Get a user by userId
  *     description: Retrive a specific user.
  *     parameters: 
@@ -87,8 +89,10 @@ router.get('/:userId', authorize(role.Admin), userController.getUser);
 
    /**
  * @swagger
- * /upgradeUser/:id:
+ * /users/upgradeUser/:id:
  *   put:
+ *     security: 
+ *       - bearerAuth: JWT
  *     summary: if you as a user have admin rights, change another users role
  *     description: give a user ID for the user you want to change
  *     parameters: 

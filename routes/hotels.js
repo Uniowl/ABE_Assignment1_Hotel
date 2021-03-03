@@ -37,8 +37,10 @@ router.route('')
 
 /**
  * @swagger
- * /addHotel/:userId:
+ * hotels/addHotel/:userId:
  *   post:
+ *     security: 
+ *       - bearerAuth: JWT
  *     summary: Add new hotel to collection and assign user as manager
  *     description: Creates a new hotel and adds the given userId as a manager
  *     parameters: 
@@ -70,6 +72,8 @@ router.post('/addHotel/:userId', authorize(role.HotelManager), hotelController.a
 * @swagger
 * /hotels/:hotelid:
 *   post:
+*     security: 
+*       - bearerAuth: JWT
 *     summary: Add a room to a hotel
 *     description: Through a hotel id add a room to the hotel
 *     parameters: 
@@ -104,6 +108,8 @@ router.put('/:hotelId/user/:userId', authorize(role.HotelManager), hotelControll
 * @swagger
 * /hotels/AllHotelsWithRooms/:userId:
 *   get:
+*     security: 
+*      - bearerAuth: JWT
 *     summary: Returns hotelrooms for user
 *     description: Shows all hotelrooms where the given userID is found in the reservationlist
 *     parameters: 

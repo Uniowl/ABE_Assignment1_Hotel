@@ -29,7 +29,17 @@ const swaggerDefinition = {
       url: 'http://localhost:3000',
       description: 'Developmentserver',
     }]
-  }
+  },
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT'
+      }
+    }
+  },
+
 };
 
 const options = {
