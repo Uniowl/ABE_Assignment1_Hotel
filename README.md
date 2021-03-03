@@ -9,7 +9,7 @@ Første aflevering af Gruppe 4 til faget ABE
 
 ### Heroku:
 - https://hotel-four.herokuapp.com
-#### Swagger:
+### Heroku/Swagger:
 - https://hotel-four.herokuapp.com/docs
 
 ### Heroku git: 
