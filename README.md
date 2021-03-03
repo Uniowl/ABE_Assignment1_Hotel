@@ -4,7 +4,7 @@ Første aflevering af Gruppe 4 til faget ABE
 
 
 ## Links til resurser:
-### Postman:
+### Postman Collection:
 - https://www.getpostman.com/collections/253bda7665be7f62d03f
 
 ### Heroku:
