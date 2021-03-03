@@ -4,6 +4,9 @@ const userController = require('../controllers/user_controller');
 const role = require('../helpers/role')
 const authorize = require('../helpers/authorize');
 
+// Mads was here 
+
+
 
 /* GET users listing. */
 // router.get('/', function(req, res, next) {
