@@ -6,6 +6,10 @@
     "start": "node ./bin/www",
     "start-trace": "node --trace-warnings ./bin/www"
   },
+  "engines": {
+    "node": "^14.9.0",
+    "npm": "^6.14.5"
+  },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cookie-parser": "~1.4.4",
